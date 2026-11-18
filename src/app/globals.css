@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-body: "Plus Jakarta Sans";
+  --font-display: "Outfit";
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-cream text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-lime-400 text-forest-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .glass-card {
+    @apply rounded-3xl border border-white/70 bg-white/80 shadow-card backdrop-blur-md;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-lime-500 via-lime-400 to-forest-300 bg-clip-text text-transparent;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-900;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-forest-900;
+  }
+
+  .field-input {
+    @apply w-full rounded-2xl border border-forest-100 bg-white px-4 py-3 text-sm text-ink shadow-sm transition placeholder:text-forest-900/75 focus:border-forest-400 focus:outline-none focus:ring-4 focus:ring-forest-100;
+  }
+
+  .field-error {
+    @apply mt-1.5 text-xs font-medium text-red-600;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
