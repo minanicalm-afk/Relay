@@ -3,14 +3,18 @@ import { cn } from "@/lib/utils";
 
 export function Logo({
   light = false,
+  compact = false,
   className,
+  href = "/",
 }: {
   light?: boolean;
+  compact?: boolean;
   className?: string;
+  href?: string;
 }) {
   return (
     <Link
-      href="/"
+      href={href}
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
       <span className="relative grid h-10 w-10 place-items-center rounded-xl bg-forest-800 shadow-card ring-1 ring-white/10">
@@ -37,16 +41,18 @@ export function Logo({
             light ? "text-white" : "text-forest-950",
           )}
         >
-          Re<span className="text-forest-500">lay</span>
+          Re<span className={light ? "text-lime-400" : "text-forest-500"}>lay</span>
         </span>
-        <span
-          className={cn(
-            "mt-0.5 text-[9px] font-bold uppercase tracking-[0.18em]",
-            light ? "text-lime-300/80" : "text-forest-700",
-          )}
-        >
-          Reuse · Restore · Impact
-        </span>
+        {!compact && (
+          <span
+            className={cn(
+              "mt-0.5 text-[9px] font-bold uppercase tracking-[0.18em]",
+              light ? "text-lime-300/80" : "text-forest-700",
+            )}
+          >
+            Reuse · Restore · Impact
+          </span>
+        )}
       </span>
     </Link>
   );

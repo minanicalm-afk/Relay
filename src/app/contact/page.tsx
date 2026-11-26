@@ -20,8 +20,8 @@ export default function ContactPage() {
         title="Let's talk about your old tech."
         description="Booking a pickup, donating, selling or exploring a partnership — we would love to hear from you. Reach us on WhatsApp or send a message below."
         breadcrumb={[{ label: "Contact" }]}
-        image="https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=2000&q=80"
-        imageAlt="A close-up of a green circuit board"
+        image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80"
+        imageAlt="Electronic circuit board representing responsible recycling"
       />
 
       <section className="bg-cream py-16 lg:py-24">

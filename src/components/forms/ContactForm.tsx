@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { saveSubmission, type PublicSubmissionType } from "@/lib/submissions-client";
 import { openWhatsApp } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
@@ -17,6 +18,15 @@ const purposes = [
 
 const areas = ["Juja", "Nairobi", "Other / not sure yet"];
 
+const purposeTypes: Record<string, PublicSubmissionType> = {
+  "Book a free pickup": "PICKUP",
+  "General enquiry": "CONTACT",
+  "Donate electronics": "DONATION",
+  "Organisation IT upgrade": "CONTACT",
+  "Sell my electronics": "SELL",
+  "Something else": "CONTACT",
+};
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -27,13 +37,26 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function submit() {
+  async function submit() {
     const next: Record<string, string> = {};
     if (!name.trim()) next.name = "Please tell us your name.";
     if (!phone.trim()) next.phone = "Please share a phone number.";
     if (!purpose) next.purpose = "Choose what you need help with.";
     setErrors(next);
     if (Object.keys(next).length) return;
+
+    await saveSubmission({
+      type: purposeTypes[purpose] ?? "CONTACT",
+      name: name.trim(),
+      email: email.trim() || undefined,
+      phone: phone.trim(),
+      location: area || undefined,
+      message: message.trim() || undefined,
+      details: {
+        purpose,
+        preferredDate: date || undefined,
+      },
+    });
 
     openWhatsApp(
       `Hello Relay! I would like to get in touch.\n\n` +

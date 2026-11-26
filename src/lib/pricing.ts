@@ -1,9 +1,9 @@
 /**
- * Instant-offer estimation engine.
+ * Offer calculation engine.
  *
- * This runs client-side to give sellers an immediate indicative offer.
- * Replace `calculateOffer` with a call to your pricing API when you have one —
- * the rest of the sell flow does not need to change.
+ * The sell flow first asks the server to match device details against the
+ * admin-managed price catalog. This function is the shared calculation used
+ * by that server check and as a client-side fallback.
  */
 
 export const DEVICE_CATEGORIES = [
@@ -49,6 +49,7 @@ export type BrandTier = "premium" | "mid" | "other";
 export type OfferInput = {
   category: DeviceCategory;
   brand: string;
+  model?: string;
   condition: Condition;
   age: Age;
   accessories: Accessory[];
@@ -137,12 +138,19 @@ function roundTo(value: number, step = 100): number {
   return Math.round(value / step) * step;
 }
 
-export function calculateOffer(input: OfferInput): OfferResult {
-  const base = BASE_VALUE[input.category];
+export type CalculateOfferOptions = {
+  basePrice?: number;
+  catalogLabel?: string;
+};
+
+export function calculateOffer(input: OfferInput, options: CalculateOfferOptions = {}): OfferResult {
+  const base = options.basePrice ?? BASE_VALUE[input.category];
   const conditionLabel =
     CONDITIONS.find((c) => c.value === input.condition)?.label ?? "-";
   const ageLabel = AGES.find((a) => a.value === input.age)?.label ?? "-";
-  const tier = brandTier(input.brand);
+  // A catalog price already reflects the model's brand, so don't apply a second brand uplift.
+  const tier = options.basePrice ? null : brandTier(input.brand);
+  const brandFactor = tier ? BRAND_FACTOR[tier] : 1;
   const accessoryFactor = input.accessories.reduce(
     (sum, item) => sum + ACCESSORY_BONUS[item],
     0,
@@ -150,7 +158,7 @@ export function calculateOffer(input: OfferInput): OfferResult {
 
   const estimate = roundTo(
     base * CONDITION_FACTOR[input.condition] * AGE_FACTOR[input.age] *
-      BRAND_FACTOR[tier] * (1 + accessoryFactor),
+      brandFactor * (1 + accessoryFactor),
   );
 
   return {
@@ -158,8 +166,16 @@ export function calculateOffer(input: OfferInput): OfferResult {
     min: roundTo(estimate * 0.85),
     max: roundTo(estimate * 1.15),
     breakdown: [
+      ...(options.basePrice
+        ? [{
+            label: "Catalog price",
+            value: `${options.catalogLabel ? `${options.catalogLabel} · ` : ""}KSh ${Math.round(options.basePrice).toLocaleString("en-KE")}`,
+          }]
+        : []),
       { label: "Device category", value: DEVICE_CATEGORIES.find((c) => c.value === input.category)?.label ?? "-" },
-      { label: "Brand tier", value: tier.charAt(0).toUpperCase() + tier.slice(1) },
+      tier
+        ? { label: "Brand tier", value: tier.charAt(0).toUpperCase() + tier.slice(1) }
+        : { label: "Brand", value: input.brand.trim() || "Catalog price" },
       { label: "Condition", value: conditionLabel },
       { label: "Age", value: ageLabel },
       { label: "Accessories", value: input.accessories.length ? `+${input.accessories.length} included` : "None listed" },

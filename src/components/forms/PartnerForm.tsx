@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { partnerTypes } from "@/lib/data";
+import { saveSubmission } from "@/lib/submissions-client";
 import { openWhatsApp } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
@@ -26,7 +27,7 @@ export function PartnerForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function submit() {
+  async function submit() {
     const next: Record<string, string> = {};
     if (!org.trim()) next.org = "Tell us your organisation's name.";
     if (!name.trim()) next.name = "Please share your name.";
@@ -34,6 +35,20 @@ export function PartnerForm() {
     if (selected.length === 0) next.interests = "Pick at least one area of interest.";
     setErrors(next);
     if (Object.keys(next).length) return;
+
+    await saveSubmission({
+      type: "PARTNERSHIP",
+      name: `${org.trim()} — ${name.trim()}`,
+      email: email.trim() || undefined,
+      phone: phone.trim() || undefined,
+      message: message.trim() || undefined,
+      details: {
+        organisation: org.trim(),
+        contact: name.trim(),
+        organisationType: type,
+        interests: selected,
+      },
+    });
 
     openWhatsApp(
       `Hello Relay! I'd like to explore a partnership.\n\n` +

@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/lib/config";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { SiteShell } from "@/components/layout/SiteShell";
 import "./globals.css";
 
 const body = Plus_Jakarta_Sans({
@@ -64,10 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${body.variable} ${display.variable}`}>
       <body className="min-h-screen bg-cream font-sans">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppFloat />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

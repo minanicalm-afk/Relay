@@ -10,6 +10,7 @@ import {
   Check,
   CircleCheck,
   FileCheck2,
+  Info,
   MessageCircle,
   RotateCcw,
   ShieldCheck,
@@ -22,14 +23,15 @@ import {
   AGES,
   CONDITIONS,
   DEVICE_CATEGORIES,
-  calculateOffer,
   type Accessory,
   type Age,
   type Condition,
   type DeviceCategory,
   type OfferResult,
 } from "@/lib/pricing";
+import { requestOffer } from "@/lib/offers-client";
 import { cn, formatKES, formatRange, generateReference } from "@/lib/utils";
+import { saveSubmission, updateSubmissionStatus, type SaveSubmissionPayload } from "@/lib/submissions-client";
 import { openWhatsApp } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
@@ -52,8 +54,16 @@ export function SellForm() {
   const [confirmed, setConfirmed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [offer, setOffer] = useState<OfferResult | null>(null);
+  const [offerSource, setOfferSource] = useState<{ catalogUsed: boolean; label?: string }>({
+    catalogUsed: false,
+  });
   const [reference, setReference] = useState("");
   const [cancelled, setCancelled] = useState(false);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
+  const [submissionToken, setSubmissionToken] = useState<string | null>(null);
+  const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "failed">("idle");
+  const [demoSaved, setDemoSaved] = useState(false);
+  const [actionState, setActionState] = useState<"idle" | "saving">("idle");
 
   useEffect(() => {
     return () => {
@@ -109,22 +119,64 @@ export function SellForm() {
     );
   }
 
-  function nextStep() {
+  async function nextStep() {
     if (step === 1 && validateStepOne()) {
       setStep(2);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (step === 2 && validateStepTwo()) {
-      const result = calculateOffer({
+      const result = await requestOffer({
         category: category as DeviceCategory,
         brand,
+        model: model.trim(),
         condition: condition as Condition,
         age: age as Age,
         accessories,
       });
+      const nextReference = generateReference();
       setOffer(result);
-      setReference(generateReference());
+      setOfferSource({ catalogUsed: result.catalogUsed, label: result.matchedPriceLabel });
+      setReference(nextReference);
       setStep(3);
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setSaveState("saving");
+      const saved = await saveSubmission({
+        type: "SELL",
+        name: name.trim() || "Seller via website",
+        message: description.trim(),
+        details: {
+          reference: nextReference,
+          category,
+          brand: brand.trim(),
+          model: model.trim(),
+          age,
+          condition,
+          accessories,
+          estimatedOffer: result.estimate,
+          offerRange: { min: result.min, max: result.max },
+          pricingSource: result.catalogUsed ? `catalog:${result.matchedPriceId ?? "matched"}` : "built-in estimate",
+          matchedPrice: result.matchedPriceLabel ?? null,
+        } satisfies SaveSubmissionPayload["details"],
+        device: {
+          deviceType: categoryLabel,
+          brand: brand.trim(),
+          model: model.trim(),
+          age: ageLabel,
+          condition: conditionLabel,
+          accessories: accessoryLabels,
+          description: description.trim(),
+          offerAmount: result.estimate,
+          pricingSource: result.catalogUsed ? `catalog:${result.matchedPriceId ?? "matched"}` : "built-in estimate",
+          matchedPrice: result.matchedPriceLabel ?? null,
+          reference: nextReference,
+          photoNames: photos.map((file) => file.name),
+          receiptName: receipt?.name,
+        },
+      });
+      setSubmissionId(saved.id ?? null);
+      setSubmissionToken(saved.token ?? null);
+      setDemoSaved(Boolean(saved.demo));
+      setSaveState(saved.ok ? "saved" : "failed");
     }
   }
 
@@ -145,16 +197,25 @@ export function SellForm() {
       .join("\n");
   }
 
-  function acceptOffer() {
+  async function recordAction(status: "IN_PROGRESS" | "CANCELLED") {
+    if (!submissionId || !submissionToken) return;
+    setActionState("saving");
+    await updateSubmissionStatus(submissionId, status, submissionToken);
+    setActionState("idle");
+  }
+
+  async function acceptOffer() {
     openWhatsApp(
       `Hello Relay! I would like to ACCEPT my instant offer.\n\n${buildDetails()}\n\nIndicative offer: ${formatKES(offer?.estimate ?? 0)} (range ${formatRange(offer?.min ?? 0, offer?.max ?? 0)}).\n\nPhotos and proof of ownership are uploaded on your website. Please let me know the next step for handover.`,
     );
+    void recordAction("IN_PROGRESS");
   }
 
-  function bargain() {
+  async function bargain() {
     openWhatsApp(
       `Hello Relay! I receive your offer of ${formatKES(offer?.estimate ?? 0)}, but I would like to discuss the price.\n\n${buildDetails()}\n\nI believe my device is worth a little more — can we talk?`,
     );
+    void recordAction("IN_PROGRESS");
   }
 
   function reset() {
@@ -174,8 +235,14 @@ export function SellForm() {
     setConfirmed(false);
     setErrors({});
     setOffer(null);
+    setOfferSource({ catalogUsed: false });
     setReference("");
     setCancelled(false);
+    setSubmissionId(null);
+    setSubmissionToken(null);
+    setDemoSaved(false);
+    setSaveState("idle");
+    setActionState("idle");
   }
 
   if (cancelled) {
@@ -186,8 +253,9 @@ export function SellForm() {
         </span>
         <h2 className="mt-6 text-2xl font-semibold text-forest-950">No problem at all.</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-forest-900/80">
-          Your enquiry was not sent and nothing was shared. Come back whenever
-          you are ready — we are always here.
+          No WhatsApp message was sent. We marked your saved enquiry as
+          cancelled so our team will not follow up. Come back whenever you are
+          ready — we are always here.
         </p>
         <Button className="mt-7" onClick={reset} icon={<RotateCcw className="h-4 w-4" />}>
           Start a new enquiry
@@ -562,6 +630,11 @@ export function SellForm() {
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.16em] text-forest-500">
               Your instant offer · {reference}
             </p>
+            <p className="mt-2 text-xs font-semibold text-forest-800">
+              {offerSource.catalogUsed
+                ? `Matched against our price catalog${offerSource.label ? `: ${offerSource.label}` : ""}.`
+                : "Indicative estimate — no exact catalog match yet."}
+            </p>
             <h2 className="mt-2 text-2xl font-semibold text-forest-950 sm:text-3xl">
               Here is what we can offer
             </h2>
@@ -608,7 +681,7 @@ export function SellForm() {
               </button>
               <button
                 type="button"
-                onClick={() => setCancelled(true)}
+                onClick={() => { setCancelled(true); void recordAction("CANCELLED"); }}
                 className="flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-forest-900/80 transition hover:text-red-600"
               >
                 <X className="h-4 w-4" /> Cancel — I&apos;m not interested
@@ -619,6 +692,29 @@ export function SellForm() {
               <WhatsAppIcon className="h-3.5 w-3.5 text-green-600" />
               Accepting or bargaining opens WhatsApp with your details ready to send.
             </p>
+            {saveState === "saving" && (
+              <p className="mx-auto mt-3 flex max-w-lg items-center justify-center gap-2 text-xs text-forest-700">
+                <Info className="h-3.5 w-3.5" /> Saving your offer to our admin inbox…
+              </p>
+            )}
+            {saveState === "saved" && (
+              <p className="mx-auto mt-3 flex max-w-lg items-center justify-center gap-2 text-xs text-forest-700">
+                <Check className="h-3.5 w-3.5" />
+                {demoSaved
+                  ? "Saved in demo mode — visible in the admin inventory until the server restarts."
+                  : "Saved — our team can see this offer in the admin dashboard."}
+              </p>
+            )}
+            {saveState === "failed" && (
+              <p className="mx-auto mt-3 flex max-w-lg items-center justify-center gap-2 text-xs text-red-600">
+                <Info className="h-3.5 w-3.5" /> We could not save a copy, but you can still continue on WhatsApp.
+              </p>
+            )}
+            {actionState === "saving" && (
+              <p className="mx-auto mt-2 flex max-w-lg items-center justify-center gap-2 text-xs text-forest-700">
+                <Info className="h-3.5 w-3.5" /> Updating your enquiry status…
+              </p>
+            )}
 
             <div className="mt-8 flex justify-center">
               <Button variant="ghost" size="sm" onClick={() => setStep(2)} icon={<ArrowLeft className="h-4 w-4" />} iconRight={false}>

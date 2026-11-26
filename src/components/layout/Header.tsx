@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarCheck, ChevronDown, MapPin, Menu, X } from "lucide-react";
+import { CalendarCheck, ChevronDown, MapPin, Menu, ShieldCheck, X } from "lucide-react";
 import { navLinks, siteConfig, whatsappUrl } from "@/lib/config";
 import { services } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -133,6 +133,16 @@ export function Header() {
           </nav>
 
           <div className="hidden items-center gap-3 xl:flex">
+            <Button
+              href="/admin"
+              size="sm"
+              variant="outline"
+              className="whitespace-nowrap"
+              aria-label="Open admin dashboard"
+              icon={<ShieldCheck className="h-3.5 w-3.5" />}
+            >
+              Admin
+            </Button>
             <a
               href={whatsappUrl()}
               target="_blank"
@@ -192,6 +202,16 @@ export function Header() {
                 )}
               </div>
             ))}
+            <Link
+              href="/admin"
+              className="mt-2 flex items-center gap-2 rounded-2xl px-4 py-3 text-base font-semibold text-forest-900/80"
+            >
+              <ShieldCheck className="h-4 w-4" />
+              Admin
+              <span className="ml-auto rounded-full bg-forest-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-forest-700">
+                Demo
+              </span>
+            </Link>
             <div className="mt-4 flex gap-3">
               <Button href="/contact" className="flex-1">
                 Book a pickup

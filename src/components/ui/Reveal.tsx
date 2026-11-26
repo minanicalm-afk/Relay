@@ -1,13 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 24,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -15,14 +11,11 @@ export function Reveal({
   y?: number;
 }) {
   return (
-    <motion.div
-      className={cn(className)}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+    <div
+      className={cn("rise-in", className)}
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

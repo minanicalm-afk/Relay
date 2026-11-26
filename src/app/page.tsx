@@ -1,10 +1,8 @@
 import { Hero } from "@/components/home/Hero";
 import { ServicesOverview } from "@/components/home/ServicesOverview";
-import { FocusSection } from "@/components/home/FocusSection";
 import { ImpactReach } from "@/components/home/ImpactReach";
 import { WhyUs } from "@/components/home/WhyUs";
 import { SellTeaser } from "@/components/home/SellTeaser";
-import { CommunityPreview } from "@/components/home/CommunityPreview";
 import { Testimonials } from "@/components/home/Testimonials";
 import { CTASection } from "@/components/shared/CTASection";
 import { FAQAccordion } from "@/components/shared/FAQAccordion";
@@ -20,8 +18,6 @@ export default function HomePage() {
       <ImpactReach />
       <WhyUs />
       <SellTeaser />
-      <CommunityPreview />
-      <FocusSection />
       <Testimonials />
 
       <section className="bg-cream py-20 lg:py-28">
