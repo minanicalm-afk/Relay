@@ -35,7 +35,12 @@ export function AdminProfileMenu({ name, email, roleLabel }: Props) {
   const initials = name.slice(0, 2).toUpperCase();
 
   return (
-    <div className="relative" ref={container}>
+    <div
+      className="relative"
+      ref={container}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -54,7 +59,8 @@ export function AdminProfileMenu({ name, email, roleLabel }: Props) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-64 overflow-hidden rounded-2xl border border-forest-100 bg-white p-1.5 shadow-lift" role="menu">
+        <div className="absolute right-0 top-full z-50 pt-2" role="menu">
+        <div className="w-64 overflow-hidden rounded-2xl border border-forest-100 bg-white p-1.5 shadow-lift">
           <div className="border-b border-forest-100 px-3 py-3">
             <p className="text-sm font-semibold text-forest-950">{name}</p>
             <p className="truncate text-xs text-forest-900/70">{email}</p>
@@ -84,6 +90,7 @@ export function AdminProfileMenu({ name, email, roleLabel }: Props) {
           >
             <LogOut className="h-4 w-4" /> {busy ? "Logging out..." : "Log out"}
           </button>
+        </div>
         </div>
       )}
     </div>

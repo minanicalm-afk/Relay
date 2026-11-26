@@ -33,6 +33,7 @@ export const roleLabels: Record<Role, string> = {
   ADMIN: "Admin",
   STAFF: "Staff",
   VIEWER: "Viewer",
+  CUSTOMER: "Customer",
 };
 
 export function formatDate(value: Date | string | null | undefined): string {

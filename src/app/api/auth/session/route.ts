@@ -10,7 +10,7 @@ export async function GET() {
 
   const user = await prisma.user.findUnique({
     where: { id: session.sub },
-    select: { name: true, role: true, active: true },
+    select: { name: true, email: true, role: true, active: true },
   });
 
   if (!user?.active) return NextResponse.json({ authenticated: false });
@@ -18,6 +18,8 @@ export async function GET() {
   return NextResponse.json({
     authenticated: true,
     name: user.name,
+    email: user.email,
     role: user.role,
+    admin: user.role !== "CUSTOMER",
   });
 }

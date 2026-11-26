@@ -66,7 +66,7 @@ export default function ContactPage() {
             </div>
 
             <a
-              href={whatsappUrl("Hello Relay! I'd like to chat.")}
+              href={whatsappUrl("Hello Relay! I'm on the contact page and would like to talk about a pickup, donation, sale, or partnership.")}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 flex items-center gap-4 rounded-3xl bg-[#25D366] p-5 text-white shadow-lift transition hover:brightness-105"

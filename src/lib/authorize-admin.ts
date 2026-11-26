@@ -1,8 +1,9 @@
-import { DEMO_ADMIN_SESSION } from "./demo-session";
+import { getSession } from "./auth";
 import type { SessionPayload } from "./auth-edge";
-import type { Permission } from "./rbac";
+import { can, type Permission } from "./rbac";
 
-/** Admin API access is open for now; real RBAC is intentionally bypassed. */
-export async function authorizeAdmin(_permission: Permission): Promise<SessionPayload> {
-  return DEMO_ADMIN_SESSION;
+export async function authorizeAdmin(permission: Permission): Promise<SessionPayload | null> {
+  const session = await getSession();
+  if (!session || !session.sub || !can(session.role, permission)) return null;
+  return session;
 }

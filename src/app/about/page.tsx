@@ -151,7 +151,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <CTASection />
+      <CTASection whatsappMessage="Hello Relay! I was reading about the team and would like to get in touch." />
     </>
   );
 }

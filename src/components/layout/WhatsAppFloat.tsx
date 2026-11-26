@@ -1,7 +1,13 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { siteConfig, whatsappUrl } from "@/lib/config";
+import { whatsappMessageForPath } from "@/lib/whatsapp-copy";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 export function WhatsAppFloat() {
+  const pathname = usePathname();
+
   return (
     <div className="fixed bottom-6 right-5 z-40 flex items-center gap-3 sm:bottom-8 sm:right-8">
       <span className="hidden rounded-full bg-forest-900 px-4 py-2 text-sm font-semibold text-white shadow-lift sm:block">
@@ -10,7 +16,7 @@ export function WhatsAppFloat() {
       <div className="relative">
         <span className="absolute inset-0 rounded-full bg-green-400/50 animate-pulse-ring" />
         <a
-          href={whatsappUrl()}
+          href={whatsappUrl(whatsappMessageForPath(pathname))}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Chat with Relay on WhatsApp: ${siteConfig.phoneDisplay}`}

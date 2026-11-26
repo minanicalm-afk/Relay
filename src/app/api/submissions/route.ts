@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
+import { getSession } from "@/lib/auth";
 import { isDemoMode, prisma } from "@/lib/prisma";
 
 const deviceSchema = z.object({
@@ -40,12 +41,14 @@ export async function POST(request: Request) {
 
   const data = parsed.data;
   const email = data.email?.trim() ? data.email.trim().toLowerCase() : null;
+  const session = await getSession();
 
   const submission = await prisma.submission.create({
     data: {
       type: data.type,
       name: data.name.trim(),
       email,
+      customerId: session?.sub,
       phone: data.phone?.trim() || null,
       location: data.location?.trim() || null,
       message: data.message?.trim() || null,

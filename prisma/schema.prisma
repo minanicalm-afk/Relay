@@ -12,6 +12,7 @@ enum Role {
   ADMIN
   STAFF
   VIEWER
+  CUSTOMER
 }
 
 enum SubmissionType {
@@ -46,12 +47,14 @@ model User {
   id           String       @id @default(cuid())
   name         String
   email        String       @unique
+  phone        String?
   passwordHash String
   role         Role         @default(SUPER_ADMIN)
   active       Boolean      @default(true)
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   submissions  Submission[] @relation("SubmissionAssignee")
+  customerSubmissions Submission[] @relation("SubmissionCustomer")
 }
 
 model Submission {
@@ -65,6 +68,8 @@ model Submission {
   message      String?
   details      Json?
   status       SubmissionStatus @default(NEW)
+  customerId   String?
+  customer     User?            @relation("SubmissionCustomer", fields: [customerId], references: [id], onDelete: SetNull)
   assignedToId String?
   assignedTo   User?            @relation("SubmissionAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
   scheduledAt  DateTime?
@@ -76,6 +81,7 @@ model Submission {
 
   @@index([type])
   @@index([status])
+  @@index([customerId])
   @@index([createdAt])
 }
 

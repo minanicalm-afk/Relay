@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarCheck, ChevronDown, MapPin, Menu, ShieldCheck, X } from "lucide-react";
-import { navLinks, siteConfig, whatsappUrl } from "@/lib/config";
+import { CalendarCheck, ChevronDown, MapPin, Menu, X } from "lucide-react";
+import { navLinks, siteConfig } from "@/lib/config";
 import { services } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { AccountMenu } from "@/components/account/AccountMenu";
 import { Logo } from "./Logo";
 
 const serviceMenu = [
@@ -52,15 +52,6 @@ export function Header() {
               <MapPin className="h-3.5 w-3.5 text-lime-400" />
               Juja &amp; Nairobi, Kenya
             </span>
-            <a
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition hover:text-lime-300"
-            >
-              <WhatsAppIcon className="h-3.5 w-3.5 text-lime-400" />
-              Chat with us
-            </a>
           </div>
         </div>
       </div>
@@ -132,40 +123,21 @@ export function Header() {
             )}
           </nav>
 
-          <div className="hidden items-center gap-3 xl:flex">
-            <Button
-              href="/admin"
-              size="sm"
-              variant="outline"
-              className="whitespace-nowrap"
-              aria-label="Open admin dashboard"
-              icon={<ShieldCheck className="h-3.5 w-3.5" />}
-            >
-              Admin
-            </Button>
-            <a
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="grid h-11 w-11 place-items-center rounded-full bg-forest-100 text-forest-700 transition hover:bg-forest-200"
-              aria-label="Chat with Relay on WhatsApp"
-            >
-              <WhatsAppIcon />
-            </a>
-            <Button href="/contact" size="md" icon={<CalendarCheck className="h-4 w-4" />}>
+          <div className="ml-auto flex items-center gap-3 xl:ml-0">
+            <Button href="/contact" size="md" className="hidden xl:inline-flex" icon={<CalendarCheck className="h-4 w-4" />}>
               Book a pickup
             </Button>
+            <AccountMenu />
+            <button
+              type="button"
+              className="grid h-11 w-11 place-items-center rounded-full border border-forest-100 bg-white text-forest-900 xl:hidden"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
-
-          <button
-            type="button"
-            className="grid h-11 w-11 place-items-center rounded-full border border-forest-100 bg-white text-forest-900 xl:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
 
       </div>
@@ -202,29 +174,10 @@ export function Header() {
                 )}
               </div>
             ))}
-            <Link
-              href="/admin"
-              className="mt-2 flex items-center gap-2 rounded-2xl px-4 py-3 text-base font-semibold text-forest-900/80"
-            >
-              <ShieldCheck className="h-4 w-4" />
-              Admin
-              <span className="ml-auto rounded-full bg-forest-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-forest-700">
-                Demo
-              </span>
-            </Link>
-            <div className="mt-4 flex gap-3">
-              <Button href="/contact" className="flex-1">
+            <div className="mt-4">
+              <Button href="/contact" className="w-full">
                 Book a pickup
               </Button>
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="grid h-12 w-12 place-items-center rounded-full bg-forest-800 text-white"
-                aria-label="Chat on WhatsApp"
-              >
-                <WhatsAppIcon />
-              </a>
             </div>
             <p className="mt-4 px-4 text-xs text-forest-700/60">
               {siteConfig.hours} · Juja &amp; Nairobi

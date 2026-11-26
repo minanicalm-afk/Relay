@@ -1,9 +1,9 @@
 import type { SessionPayload } from "./auth-edge";
 
-/** Temporary open-admin session. Remove this when real authentication is enabled. */
+/** Fallback identity used only by scripts that still import this constant. */
 export const DEMO_ADMIN_SESSION: SessionPayload = {
   sub: "demo-admin",
-  email: "admin@techgive.co.ke",
-  name: "Relay Admin",
+  email: "admin@josachi.com",
+  name: "Josachi Admin",
   role: "SUPER_ADMIN",
 };

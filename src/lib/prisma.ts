@@ -30,9 +30,10 @@ const demoStore = globalForDemo.techgiveDemoStore ?? {
   users: [
     {
       id: "demo-admin",
-      name: "Relay Admin",
-      email: "admin@techgive.co.ke",
-      passwordHash: "",
+      name: "Josachi Admin",
+      email: "admin@josachi.com",
+      phone: null,
+      passwordHash: "$2b$12$wS3HaWEn30naubDvGacw2.rHRWrMUiqodXBGQNFDQPU48IMog0FWu",
       role: "SUPER_ADMIN",
       active: true,
       createdAt: now(),
@@ -40,6 +41,15 @@ const demoStore = globalForDemo.techgiveDemoStore ?? {
     },
   ],
 };
+
+const keptAdmin = demoStore.users.find((user) => user.id === "demo-admin");
+if (keptAdmin) {
+  keptAdmin.email = "admin@josachi.com";
+  keptAdmin.name = keptAdmin.name === "Relay Admin" ? "Josachi Admin" : keptAdmin.name;
+  if (!keptAdmin.passwordHash) {
+    keptAdmin.passwordHash = "$2b$12$wS3HaWEn30naubDvGacw2.rHRWrMUiqodXBGQNFDQPU48IMog0FWu";
+  }
+}
 
 // Older in-memory stores created before the price catalog existed need this field.
 demoStore.devicePrices ??= [];
@@ -84,7 +94,11 @@ function matches(where: Row | undefined, row: Row): boolean {
   if (!where) return true;
 
   for (const [key, value] of Object.entries(where)) {
-    if (value === undefined || value === null) continue;
+    if (value === undefined) continue;
+    if (value === null) {
+      if (row[key] != null) return false;
+      continue;
+    }
 
     if (key === "OR" && Array.isArray(value)) {
       const found = value.some((condition: Row) =>

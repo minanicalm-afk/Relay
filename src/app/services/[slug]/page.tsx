@@ -145,7 +145,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         </Container>
       </section>
 
-      <CTASection />
+      <CTASection whatsappMessage={`Hello Relay! I'm looking at ${service.title} and would like to ask about it.`} />
     </>
   );
 }

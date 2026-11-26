@@ -125,6 +125,7 @@ export default function CommunityPage() {
         description="We are always looking for organisations that share our belief in a cleaner, fairer future. Tell us what you care about."
         primaryLabel="Become a partner"
         primaryHref="/partnerships"
+        whatsappMessage="Hello Relay! I'd like to talk about joining a community programme."
       />
     </>
   );

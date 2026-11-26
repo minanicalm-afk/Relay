@@ -1,11 +1,11 @@
 import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import type { Role } from "@prisma/client";
 import { getAuthSecret, SESSION_COOKIE } from "./auth-secret";
-import type { Permission } from "./rbac";
+import { can, type Permission } from "./rbac";
 import type { SessionPayload } from "./auth-edge";
-import { DEMO_ADMIN_SESSION } from "./demo-session";
 import { prisma } from "./prisma";
 
 export { SESSION_COOKIE };
@@ -65,7 +65,8 @@ export async function getSession(): Promise<SessionPayload | null> {
       (payload.role !== "SUPER_ADMIN" &&
         payload.role !== "ADMIN" &&
         payload.role !== "STAFF" &&
-        payload.role !== "VIEWER")
+        payload.role !== "VIEWER" &&
+        payload.role !== "CUSTOMER")
     ) {
       return null;
     }
@@ -81,13 +82,17 @@ export async function getSession(): Promise<SessionPayload | null> {
   }
 }
 
-/** Admin access is open for now; real session checks are intentionally bypassed. */
 export async function requireAdmin(): Promise<SessionPayload> {
-  return DEMO_ADMIN_SESSION;
+  const session = await getSession();
+  if (!session) redirect("/sign-in?next=/admin");
+  if (!can(session.role, "admin:access")) redirect("/account");
+  return session;
 }
 
-export async function requirePermission(_permission: Permission): Promise<SessionPayload> {
-  return DEMO_ADMIN_SESSION;
+export async function requirePermission(permission: Permission): Promise<SessionPayload> {
+  const session = await requireAdmin();
+  if (!can(session.role, permission)) redirect("/admin");
+  return session;
 }
 
 export async function getAdminUser() {

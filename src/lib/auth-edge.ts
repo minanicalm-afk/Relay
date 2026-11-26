@@ -6,7 +6,7 @@ export type SessionPayload = {
   sub: string;
   email: string;
   name: string;
-  role: "SUPER_ADMIN" | "ADMIN" | "STAFF" | "VIEWER";
+  role: "SUPER_ADMIN" | "ADMIN" | "STAFF" | "VIEWER" | "CUSTOMER";
 };
 
 export async function verifySessionToken(token: string): Promise<SessionPayload | null> {
@@ -19,7 +19,8 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
       (payload.role !== "SUPER_ADMIN" &&
         payload.role !== "ADMIN" &&
         payload.role !== "STAFF" &&
-        payload.role !== "VIEWER")
+        payload.role !== "VIEWER" &&
+        payload.role !== "CUSTOMER")
     ) {
       return null;
     }

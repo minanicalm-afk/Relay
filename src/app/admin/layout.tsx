@@ -40,7 +40,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
         {isDemoMode && (
           <div className="border-b border-amber-200 bg-amber-50 px-5 py-2.5 text-center text-xs font-semibold text-amber-900">
-            Demo mode — admin access is open and records are kept in memory until the server restarts.
+            Demo mode — no database is connected. Sign in is required, and records stay in memory until the server restarts.
           </div>
         )}
 

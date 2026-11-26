@@ -126,7 +126,7 @@ export function Footer() {
               </li>
             </ul>
             <a
-              href={whatsappUrl()}
+              href={whatsappUrl("Hello Relay! I found your details in the site footer and would like to get in touch.")}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500 px-5 py-2.5 text-sm font-bold text-forest-950 transition hover:bg-lime-400"

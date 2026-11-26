@@ -98,7 +98,7 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <CTASection />
+      <CTASection whatsappMessage="Hello Relay! I'd like help choosing the right service for my electronics." />
     </>
   );
 }

@@ -22,6 +22,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
   }
 
+  if (user.email) {
+    await prisma.submission.updateMany({
+      where: { email: user.email, customerId: null },
+      data: { customerId: user.id },
+    });
+  }
+
   await createSession(user);
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    role: user.role,
+    admin: user.role !== "CUSTOMER",
+  });
 }

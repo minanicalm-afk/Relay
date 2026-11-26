@@ -2,7 +2,7 @@ import { requirePermission } from "@/lib/auth";
 import { can } from "@/lib/rbac";
 import { prisma } from "@/lib/prisma";
 import { roleLabels } from "@/lib/admin";
-import { adminRoles } from "@/lib/options";
+import { adminRoles, type AdminRoleValue } from "@/lib/options";
 import { UsersManager } from "@/components/admin/UsersManager";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +11,7 @@ export const metadata = { title: "Users & roles" };
 export default async function UsersPage() {
   const session = await requirePermission("users:read");
   const users = await prisma.user.findMany({
+    where: { role: { not: "CUSTOMER" } },
     orderBy: [{ role: "asc" }, { name: "asc" }],
     select: {
       id: true,
@@ -45,12 +46,20 @@ export default async function UsersPage() {
       </section>
 
       <UsersManager
-        users={users.map((user) => ({ ...user, createdAt: user.createdAt.toISOString() }))}
+        users={users.flatMap((user) =>
+          isStaffRole(user.role)
+            ? [{ ...user, role: user.role, createdAt: user.createdAt.toISOString() }]
+            : [],
+        )}
         currentUserId={session.sub}
         canWrite={can(session.role, "users:write")}
       />
     </div>
   );
+}
+
+function isStaffRole(role: string): role is AdminRoleValue {
+  return (adminRoles as readonly string[]).includes(role);
 }
 
 const roleDescriptions = {
