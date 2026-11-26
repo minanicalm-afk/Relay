@@ -18,7 +18,18 @@ export async function POST(request: Request) {
 
   const user = await prisma.user.findUnique({ where: { email: parsed.data.email.toLowerCase() } });
 
-  if (!user || !user.active || !(await verifyPassword(parsed.data.password, user.passwordHash))) {
+  if (!user || !user.active) {
+    return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
+  }
+
+  if (user.hasPassword === false) {
+    return NextResponse.json(
+      { error: "This email uses Google sign-in. Continue with Google, then add a password from your profile if you want both." },
+      { status: 401 },
+    );
+  }
+
+  if (!(await verifyPassword(parsed.data.password, user.passwordHash))) {
     return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
   }
 

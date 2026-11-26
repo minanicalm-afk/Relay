@@ -34,6 +34,8 @@ const demoStore = globalForDemo.techgiveDemoStore ?? {
       email: "admin@josachi.com",
       phone: null,
       passwordHash: "$2b$12$wS3HaWEn30naubDvGacw2.rHRWrMUiqodXBGQNFDQPU48IMog0FWu",
+      googleId: null,
+      hasPassword: true,
       role: "SUPER_ADMIN",
       active: true,
       createdAt: now(),

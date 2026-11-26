@@ -6,8 +6,8 @@ export const metadata: Metadata = { title: "Sign in" };
 export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; error?: string }>;
 }) {
-  const { next } = await searchParams;
-  return <SignInForm nextPath={next} />;
+  const { next, error } = await searchParams;
+  return <SignInForm nextPath={next} errorCode={error} />;
 }

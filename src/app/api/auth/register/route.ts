@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       email,
       phone: parsed.data.phone?.trim() || null,
       passwordHash: await hashPassword(parsed.data.password),
+      hasPassword: true,
       role: "CUSTOMER",
       active: true,
     },

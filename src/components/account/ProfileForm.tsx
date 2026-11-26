@@ -9,9 +9,10 @@ type Props = {
   name: string;
   email: string;
   phone: string;
+  hasPassword?: boolean;
 };
 
-export function ProfileForm({ name, email, phone }: Props) {
+export function ProfileForm({ name, email, phone, hasPassword = true }: Props) {
   const router = useRouter();
   const [form, setForm] = useState({
     name,
@@ -59,7 +60,9 @@ export function ProfileForm({ name, email, phone }: Props) {
     >
       <h2 className="text-lg font-semibold text-forest-950">Your details</h2>
       <p className="mt-1 text-sm text-forest-900/70">
-        Update the name, email and phone we use when you get in touch. Leave the password fields blank to keep your current password.
+        {hasPassword
+          ? "Update the name, email and phone we use when you get in touch. Leave the password fields blank to keep your current password."
+          : "You signed in with Google. Add a password here if you also want to sign in with email."}
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -75,12 +78,14 @@ export function ProfileForm({ name, email, phone }: Props) {
           <label className="field-label" htmlFor="profile-phone">Phone</label>
           <input id="profile-phone" className="field-input" value={form.phone} placeholder="+254 7..." onChange={(event) => setField("phone", event.target.value)} />
         </div>
-        <div>
-          <label className="field-label" htmlFor="profile-current-password">Current password</label>
-          <input id="profile-current-password" type="password" className="field-input" value={form.currentPassword} autoComplete="current-password" onChange={(event) => setField("currentPassword", event.target.value)} />
-        </div>
-        <div>
-          <label className="field-label" htmlFor="profile-new-password">New password</label>
+        {hasPassword && (
+          <div>
+            <label className="field-label" htmlFor="profile-current-password">Current password</label>
+            <input id="profile-current-password" type="password" className="field-input" value={form.currentPassword} autoComplete="current-password" onChange={(event) => setField("currentPassword", event.target.value)} />
+          </div>
+        )}
+        <div className={hasPassword ? undefined : "sm:col-span-2"}>
+          <label className="field-label" htmlFor="profile-new-password">{hasPassword ? "New password" : "Password"}</label>
           <input id="profile-new-password" type="password" className="field-input" value={form.newPassword} autoComplete="new-password" onChange={(event) => setField("newPassword", event.target.value)} />
         </div>
       </div>

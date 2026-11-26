@@ -20,7 +20,7 @@ export default async function AccountPage() {
 
   const user = await prisma.user.findUnique({
     where: { id: session.sub },
-    select: { id: true, name: true, email: true, phone: true, role: true },
+    select: { id: true, name: true, email: true, phone: true, role: true, hasPassword: true },
   });
 
   const [owned, matchedByEmail] = await Promise.all([
@@ -56,6 +56,7 @@ export default async function AccountPage() {
               name={user?.name ?? session.name}
               email={user?.email ?? session.email}
               phone={user?.phone ?? ""}
+              hasPassword={user?.hasPassword ?? true}
             />
           </div>
         </div>

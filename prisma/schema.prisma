@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Role {
@@ -49,6 +50,8 @@ model User {
   email        String       @unique
   phone        String?
   passwordHash String
+  googleId     String?      @unique
+  hasPassword  Boolean      @default(true)
   role         Role         @default(SUPER_ADMIN)
   active       Boolean      @default(true)
   createdAt    DateTime     @default(now())

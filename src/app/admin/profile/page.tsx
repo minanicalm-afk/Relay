@@ -12,7 +12,7 @@ export default async function AdminProfilePage() {
   const session = await requireAdmin();
   const user = await prisma.user.findUnique({
     where: { id: session.sub },
-    select: { name: true, email: true, phone: true, role: true, active: true },
+    select: { name: true, email: true, phone: true, role: true, active: true, hasPassword: true },
   });
 
   return (
@@ -39,6 +39,7 @@ export default async function AdminProfilePage() {
           name={user?.name ?? session.name}
           email={user?.email ?? session.email}
           phone={user?.phone ?? ""}
+          hasPassword={user?.hasPassword ?? true}
         />
       </div>
     </div>

@@ -25,8 +25,18 @@ type SessionUser = {
   role: Role;
 };
 
-export async function createSession(user: SessionUser): Promise<void> {
-  const token = await new SignJWT({
+export function sessionCookieOptions() {
+  return {
+    httpOnly: true,
+    sameSite: "lax" as const,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  };
+}
+
+export async function issueSessionToken(user: SessionUser): Promise<string> {
+  return new SignJWT({
     email: user.email,
     name: user.name,
     role: user.role,
@@ -36,15 +46,12 @@ export async function createSession(user: SessionUser): Promise<void> {
     .setIssuedAt()
     .setExpirationTime("7d")
     .sign(getAuthSecret());
+}
 
+export async function createSession(user: SessionUser): Promise<void> {
+  const token = await issueSessionToken(user);
   const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE, token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  cookieStore.set(SESSION_COOKIE, token, sessionCookieOptions());
 }
 
 export async function deleteSession(): Promise<void> {

@@ -10,7 +10,7 @@ export function WhatsAppFloat() {
 
   return (
     <div className="fixed bottom-6 right-5 z-40 flex items-center gap-3 sm:bottom-8 sm:right-8">
-      <span className="hidden rounded-full bg-forest-900 px-4 py-2 text-sm font-semibold text-white shadow-lift sm:block">
+      <span className="hidden rounded-full bg-forest-900 px-4 py-2 text-sm font-semibold text-white shadow-lift xl:block">
         Need help? Chat with us
       </span>
       <div className="relative">

@@ -37,7 +37,7 @@ export async function PATCH(request: Request) {
     if (nextPassword.length < 8) {
       return NextResponse.json({ error: "New passwords need at least 8 characters." }, { status: 400 });
     }
-    if (!parsed.data.currentPassword || !(await verifyPassword(parsed.data.currentPassword, user.passwordHash))) {
+    if (user.hasPassword && (!parsed.data.currentPassword || !(await verifyPassword(parsed.data.currentPassword, user.passwordHash)))) {
       return NextResponse.json({ error: "Current password is incorrect." }, { status: 400 });
     }
   }
@@ -49,6 +49,7 @@ export async function PATCH(request: Request) {
       email,
       phone: parsed.data.phone?.trim() || null,
       passwordHash: nextPassword ? await hashPassword(nextPassword) : undefined,
+      hasPassword: nextPassword ? true : undefined,
     },
   });
 
