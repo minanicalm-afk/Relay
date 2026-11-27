@@ -77,7 +77,8 @@ export function Hero() {
 
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-forest-900/80">
             <span className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-forest-500" /> Juja &amp; Nairobi
+              <MapPin className="h-4 w-4 shrink-0 text-forest-500" />
+              <span>Nairobi, Kenya</span>
             </span>
             <span className="inline-flex items-center gap-2">
               <Recycle className="h-4 w-4 text-forest-500" /> Free collection

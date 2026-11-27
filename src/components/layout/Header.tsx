@@ -47,12 +47,10 @@ export function Header() {
             <span className="text-lime-400">✦</span>{" "}
             {siteConfig.pillars.join("  •  ")}
           </p>
-          <div className="hidden items-center gap-5 md:flex">
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5 text-lime-400" />
-              Juja &amp; Nairobi, Kenya
-            </span>
-          </div>
+          <p className="inline-flex items-center gap-1.5">
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-lime-400" />
+            <span>Nairobi, Kenya</span>
+          </p>
         </div>
       </div>
 

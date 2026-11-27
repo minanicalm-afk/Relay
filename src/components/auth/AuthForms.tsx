@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, ArrowRight, Lock, Mail, Phone, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/layout/Logo";
 
@@ -27,10 +28,50 @@ function googleHref(nextPath?: string) {
 
 function GoogleButton({ nextPath }: { nextPath?: string }) {
   return (
-    <a href={googleHref(nextPath)} className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-full border border-forest-200 bg-white text-sm font-semibold text-forest-950 transition hover:border-forest-400 hover:bg-cream">
+    <a href={googleHref(nextPath)} className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-full border border-forest-200 bg-white text-sm font-semibold text-forest-950 shadow-card transition hover:border-forest-400 hover:bg-cream">
       <GoogleMark />
       Continue with Google
     </a>
+  );
+}
+
+function AuthField({
+  id,
+  label,
+  type = "text",
+  autoComplete,
+  value,
+  placeholder,
+  icon,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  autoComplete?: string;
+  value: string;
+  placeholder?: string;
+  icon: React.ReactNode;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div>
+      <label className="sr-only" htmlFor={id}>{label}</label>
+      <div className="relative">
+        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-forest-700/70">
+          {icon}
+        </span>
+        <input
+          id={id}
+          type={type}
+          autoComplete={autoComplete}
+          placeholder={placeholder ?? label}
+          className="field-input h-12 rounded-2xl border-forest-100 bg-forest-50/70 pl-11"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -86,8 +127,8 @@ export function SignInForm({ nextPath, errorCode }: { nextPath?: string; errorCo
 
   return (
     <AuthCard
-      title="Sign in"
-      description="Customers can follow their pickups and offers. Team members can open the admin console from the profile menu."
+      title="Welcome back"
+      description="Sign in to follow your pickups, offers and account."
     >
       <GoogleButton nextPath={nextPath} />
       <OrDivider />
@@ -95,29 +136,23 @@ export function SignInForm({ nextPath, errorCode }: { nextPath?: string; errorCo
         <p className="field-error mb-4" role="alert">{googleErrors[errorCode]}</p>
       )}
       <form
-        className="space-y-4"
+        className="space-y-3"
         onSubmit={(event) => {
           event.preventDefault();
           void submit();
         }}
       >
-        <div>
-          <label className="field-label" htmlFor="sign-in-email">Email</label>
-          <input id="sign-in-email" type="email" autoComplete="email" className="field-input" value={email} onChange={(event) => setEmail(event.target.value)} />
-        </div>
-        <div>
-          <label className="field-label" htmlFor="sign-in-password">Password</label>
-          <input id="sign-in-password" type="password" autoComplete="current-password" className="field-input" value={password} onChange={(event) => setPassword(event.target.value)} />
-        </div>
+        <AuthField id="sign-in-email" label="Email address" type="email" autoComplete="email" icon={<Mail className="h-4 w-4" />} value={email} onChange={setEmail} />
+        <AuthField id="sign-in-password" label="Password" type="password" autoComplete="current-password" icon={<Lock className="h-4 w-4" />} value={password} onChange={setPassword} />
         {error && <p className="field-error" role="alert">{error}</p>}
-        <Button className="w-full" type="submit" disabled={busy}>
+        <Button className="w-full" type="submit" disabled={busy} icon={<ArrowRight className="h-4 w-4" />}>
           {busy ? "Signing in..." : "Sign in"}
         </Button>
       </form>
-      <p className="mt-6 text-sm text-forest-900/70">
-        New here?{" "}
-        <Link href="/sign-up" className="font-semibold text-forest-800 hover:text-forest-950">
-          Create a customer account
+      <p className="mt-6 text-center text-sm text-forest-900/70">
+        New to Novacycle?{" "}
+        <Link href="/sign-up" className="font-semibold text-forest-800 hover:text-lime-700">
+          Create an account
         </Link>
       </p>
     </AuthCard>
@@ -159,36 +194,24 @@ export function SignUpForm() {
       <GoogleButton />
       <OrDivider />
       <form
-        className="space-y-4"
+        className="space-y-3"
         onSubmit={(event) => {
           event.preventDefault();
           void submit();
         }}
       >
-        <div>
-          <label className="field-label" htmlFor="sign-up-name">Name</label>
-          <input id="sign-up-name" className="field-input" value={name} onChange={(event) => setName(event.target.value)} />
-        </div>
-        <div>
-          <label className="field-label" htmlFor="sign-up-email">Email</label>
-          <input id="sign-up-email" type="email" autoComplete="email" className="field-input" value={email} onChange={(event) => setEmail(event.target.value)} />
-        </div>
-        <div>
-          <label className="field-label" htmlFor="sign-up-phone">Phone</label>
-          <input id="sign-up-phone" className="field-input" value={phone} placeholder="+254 7..." onChange={(event) => setPhone(event.target.value)} />
-        </div>
-        <div>
-          <label className="field-label" htmlFor="sign-up-password">Password</label>
-          <input id="sign-up-password" type="password" autoComplete="new-password" className="field-input" value={password} onChange={(event) => setPassword(event.target.value)} />
-        </div>
+        <AuthField id="sign-up-name" label="Full name" autoComplete="name" icon={<UserRound className="h-4 w-4" />} value={name} onChange={setName} />
+        <AuthField id="sign-up-email" label="Email address" type="email" autoComplete="email" icon={<Mail className="h-4 w-4" />} value={email} onChange={setEmail} />
+        <AuthField id="sign-up-phone" label="Phone" type="tel" autoComplete="tel" placeholder="+254 7..." icon={<Phone className="h-4 w-4" />} value={phone} onChange={setPhone} />
+        <AuthField id="sign-up-password" label="Password" type="password" autoComplete="new-password" icon={<Lock className="h-4 w-4" />} value={password} onChange={setPassword} />
         {error && <p className="field-error" role="alert">{error}</p>}
-        <Button className="w-full" type="submit" disabled={busy}>
+        <Button className="w-full" type="submit" disabled={busy} icon={<ArrowRight className="h-4 w-4" />}>
           {busy ? "Creating account..." : "Create account"}
         </Button>
       </form>
-      <p className="mt-6 text-sm text-forest-900/70">
+      <p className="mt-6 text-center text-sm text-forest-900/70">
         Already have an account?{" "}
-        <Link href="/sign-in" className="font-semibold text-forest-800 hover:text-forest-950">
+        <Link href="/sign-in" className="font-semibold text-forest-800 hover:text-lime-700">
           Sign in
         </Link>
       </p>
@@ -206,12 +229,24 @@ function AuthCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="bg-cream py-16 lg:py-24">
-      <div className="mx-auto w-full max-w-md px-5">
-        <Logo />
-        <div className="mt-8 rounded-3xl border border-forest-100 bg-white p-6 shadow-card sm:p-8">
-          <h1 className="text-3xl font-semibold text-forest-950">{title}</h1>
-          <p className="mt-2 text-sm leading-relaxed text-forest-900/70">{description}</p>
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-cream via-cream to-sand">
+      <div className="pointer-events-none absolute inset-0 bg-grid-pattern bg-grid opacity-60" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[40rem] -translate-x-1/2 rounded-full bg-lime-300/30 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-forest-200/40 blur-3xl" />
+      <Link
+        href="/"
+        className="absolute left-5 top-5 z-10 inline-flex items-center gap-2 text-sm font-semibold text-forest-800/80 transition hover:text-forest-950"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to home
+      </Link>
+      <div className="relative mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-5 py-12">
+        <div className="flex justify-center">
+          <Logo />
+        </div>
+        <div className="mt-8 rounded-[1.75rem] border border-forest-100 bg-white/90 p-6 shadow-lift backdrop-blur-md sm:p-8">
+          <h1 className="text-2xl font-semibold text-forest-950">{title}</h1>
+          <p className="mt-1.5 text-sm leading-relaxed text-forest-900/70">{description}</p>
           <div className="mt-6">{children}</div>
         </div>
       </div>

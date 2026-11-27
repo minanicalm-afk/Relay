@@ -3,7 +3,7 @@ import type { SessionPayload } from "./auth-edge";
 /** Fallback identity used only by scripts that still import this constant. */
 export const DEMO_ADMIN_SESSION: SessionPayload = {
   sub: "demo-admin",
-  email: "admin@josachi.com",
-  name: "Josachi Admin",
+  email: "novacycletechnologies@gmail.com",
+  name: "Novacycle Admin",
   role: "SUPER_ADMIN",
 };

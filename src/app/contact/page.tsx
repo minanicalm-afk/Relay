@@ -97,11 +97,11 @@ export default function ContactPage() {
             <div className="flex flex-col gap-2 border-b border-forest-100 px-6 py-5 sm:flex-row sm:items-end sm:justify-between sm:px-8">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-forest-500">
-                  Juja shop
+                Juja collection center
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold text-forest-950">Find us on the map</h2>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-forest-900/75">
-                  Josachi Computers, Alma Matta Building, along Gachororo Road, JKUAT Gate B, Juja.
+                  Josachi TechHub Computers, Alma Matta Building, along Gachororo Road, JKUAT Gate B, Juja.
                 </p>
               </div>
               <a
@@ -115,7 +115,7 @@ export default function ContactPage() {
               </a>
             </div>
             <iframe
-              title="Map of the Novacycle Juja shop at Josachi Computers, Alma Matta Building, Gachororo Road"
+              title="Map of the Novacycle Juja collection point at Josachi Computers, Alma Matta Building, Gachororo Road"
               src="https://maps.google.com/maps?q=-1.0949261,37.0190503&z=17&output=embed"
               className="h-[24rem] w-full border-0 sm:h-[28rem]"
               loading="lazy"

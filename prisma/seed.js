@@ -10,13 +10,32 @@ const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = (process.env.ADMIN_EMAIL || "admin@josachi.com").toLowerCase();
+  const email = (process.env.ADMIN_EMAIL || "novacycletechnologies@gmail.com").toLowerCase();
   const password = process.env.ADMIN_PASSWORD || "qwerty";
-  const name = process.env.ADMIN_NAME || "Josachi Admin";
+  const name = process.env.ADMIN_NAME || "Novacycle Admin";
+  const legacyEmail = "admin@josachi.com";
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
+    if (existing.role !== "SUPER_ADMIN" || !existing.active) {
+      await prisma.user.update({
+        where: { id: existing.id },
+        data: { role: "SUPER_ADMIN", active: true },
+      });
+      console.log(`Promoted existing account to super admin: ${email}`);
+      return;
+    }
     console.log(`Super admin already exists: ${email}`);
+    return;
+  }
+
+  const legacy = await prisma.user.findUnique({ where: { email: legacyEmail } });
+  if (legacy) {
+    await prisma.user.update({
+      where: { id: legacy.id },
+      data: { email, name: legacy.name === "Josachi Admin" ? name : legacy.name },
+    });
+    console.log(`Updated super admin email to ${email}`);
     return;
   }
 

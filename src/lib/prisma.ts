@@ -30,8 +30,8 @@ const demoStore = globalForDemo.techgiveDemoStore ?? {
   users: [
     {
       id: "demo-admin",
-      name: "Josachi Admin",
-      email: "admin@josachi.com",
+      name: "Novacycle Admin",
+      email: "novacycletechnologies@gmail.com",
       phone: null,
       passwordHash: "$2b$12$wS3HaWEn30naubDvGacw2.rHRWrMUiqodXBGQNFDQPU48IMog0FWu",
       googleId: null,
@@ -46,8 +46,8 @@ const demoStore = globalForDemo.techgiveDemoStore ?? {
 
 const keptAdmin = demoStore.users.find((user) => user.id === "demo-admin");
 if (keptAdmin) {
-  keptAdmin.email = "admin@josachi.com";
-  keptAdmin.name = keptAdmin.name === "Relay Admin" ? "Josachi Admin" : keptAdmin.name;
+  keptAdmin.email = "novacycletechnologies@gmail.com";
+  keptAdmin.name = keptAdmin.name === "Relay Admin" || keptAdmin.name === "Josachi Admin" ? "Novacycle Admin" : keptAdmin.name;
   if (!keptAdmin.passwordHash) {
     keptAdmin.passwordHash = "$2b$12$wS3HaWEn30naubDvGacw2.rHRWrMUiqodXBGQNFDQPU48IMog0FWu";
   }
