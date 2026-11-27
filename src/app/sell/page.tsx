@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 export const metadata: Metadata = {
   title: "Sell Your Electronics — Instant Offer",
   description:
-    "Describe your device, upload photos and proof of ownership, and get an instant offer from Relay. Accept, bargain on WhatsApp or cancel — you decide.",
+    "Describe your device, upload photos and proof of ownership, and get an instant offer from Novacycle. Accept, bargain on WhatsApp or cancel — you decide.",
 };
 
 const perks = [
@@ -36,7 +36,7 @@ export default function SellPage() {
 
             <aside className="space-y-4 lg:sticky lg:top-28">
               <div className="rounded-3xl border border-forest-100 bg-white p-6 shadow-card">
-                <h2 className="text-base font-semibold text-forest-950">Why sell to Relay?</h2>
+                <h2 className="text-base font-semibold text-forest-950">Why sell to Novacycle?</h2>
                 <div className="mt-5 space-y-5">
                   {perks.map((perk) => (
                     <div key={perk.title} className="flex gap-3">

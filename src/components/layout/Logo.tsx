@@ -41,16 +41,16 @@ export function Logo({
             light ? "text-white" : "text-forest-950",
           )}
         >
-          Re<span className={light ? "text-lime-400" : "text-forest-500"}>lay</span>
+          Nova<span className={light ? "text-lime-400" : "text-forest-500"}>cycle</span>
         </span>
         {!compact && (
           <span
             className={cn(
-              "mt-0.5 text-[9px] font-bold uppercase tracking-[0.18em]",
+              "mt-0.5 text-[9px] font-bold uppercase tracking-[0.16em]",
               light ? "text-lime-300/80" : "text-forest-700",
             )}
           >
-            Reuse · Restore · Impact
+            Technologies Ltd
           </span>
         )}
       </span>

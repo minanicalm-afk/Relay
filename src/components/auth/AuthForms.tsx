@@ -16,7 +16,7 @@ const googleErrors: Record<string, string> = {
   google_denied: "Google sign-in was cancelled.",
   google_state: "Google sign-in expired. Try again.",
   google_email: "Google did not share a verified email. Allow email access and try again.",
-  google_inactive: "This account is inactive. Contact Relay to restore it.",
+  google_inactive: "This account is inactive. Contact Novacycle to restore it.",
   google_mismatch: "This email is already linked to a different Google account.",
   google_failed: "Google sign-in failed. Try again.",
 };

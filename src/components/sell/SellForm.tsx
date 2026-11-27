@@ -206,14 +206,14 @@ export function SellForm() {
 
   async function acceptOffer() {
     openWhatsApp(
-      `Hello Relay! I would like to ACCEPT my instant offer.\n\n${buildDetails()}\n\nIndicative offer: ${formatKES(offer?.estimate ?? 0)} (range ${formatRange(offer?.min ?? 0, offer?.max ?? 0)}).\n\nPhotos and proof of ownership are uploaded on your website. Please let me know the next step for handover.`,
+      `Hello Novacycle! I would like to ACCEPT my instant offer.\n\n${buildDetails()}\n\nIndicative offer: ${formatKES(offer?.estimate ?? 0)} (range ${formatRange(offer?.min ?? 0, offer?.max ?? 0)}).\n\nPhotos and proof of ownership are uploaded on your website. Please let me know the next step for handover.`,
     );
     void recordAction("IN_PROGRESS");
   }
 
   async function bargain() {
     openWhatsApp(
-      `Hello Relay! I receive your offer of ${formatKES(offer?.estimate ?? 0)}, but I would like to discuss the price.\n\n${buildDetails()}\n\nI believe my device is worth a little more — can we talk?`,
+      `Hello Novacycle! I receive your offer of ${formatKES(offer?.estimate ?? 0)}, but I would like to discuss the price.\n\n${buildDetails()}\n\nI believe my device is worth a little more — can we talk?`,
     );
     void recordAction("IN_PROGRESS");
   }

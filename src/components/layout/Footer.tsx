@@ -38,8 +38,7 @@ export function Footer() {
           <div>
             <Logo light />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-forest-100/70">
-              We collect, repair and recycle electronics, donate working devices
-              to needy communities and partner for a greener, fairer Kenya.
+              {siteConfig.name} — {siteConfig.statement}
             </p>
             <div className="mt-6 flex gap-2">
               {[
@@ -126,7 +125,7 @@ export function Footer() {
               </li>
             </ul>
             <a
-              href={whatsappUrl("Hello Relay! I found your details in the site footer and would like to get in touch.")}
+              href={whatsappUrl("Hello Novacycle! I found your details in the site footer and would like to get in touch.")}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-lime-500 px-5 py-2.5 text-sm font-bold text-forest-950 transition hover:bg-lime-400"

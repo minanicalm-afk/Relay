@@ -51,7 +51,7 @@ export function PartnerForm() {
     });
 
     openWhatsApp(
-      `Hello Relay! I'd like to explore a partnership.\n\n` +
+      `Hello Novacycle! I'd like to explore a partnership.\n\n` +
         `Organisation: ${org.trim()}\n` +
         `Contact: ${name.trim()}\n` +
         `Email: ${email.trim() || "Not provided"}\n` +

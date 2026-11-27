@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export const metadata: Metadata = {
   title: "Partnerships",
   description:
-    "Partner with Relay for tree planting, recycling drives, charity marathons and community support. Environmental champions welcome.",
+    "Partner with Novacycle for tree planting, recycling drives, charity marathons and community support. Environmental champions welcome.",
 };
 
 const steps = [

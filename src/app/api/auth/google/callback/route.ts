@@ -74,7 +74,7 @@ export async function GET(request: Request) {
         })
       : await prisma.user.create({
           data: {
-            name: profile.name?.trim() || email.split("@")[0] || "Relay customer",
+            name: profile.name?.trim() || email.split("@")[0] || "Novacycle customer",
             email,
             googleId,
             passwordHash: await hashPassword(randomBytes(32).toString("hex")),

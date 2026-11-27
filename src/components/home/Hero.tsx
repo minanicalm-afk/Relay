@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight, MapPin, Recycle, Settings, ShieldCheck } from "l
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-import { whatsappUrl } from "@/lib/config";
+import { siteConfig, whatsappUrl } from "@/lib/config";
 import { impactStats } from "@/lib/data";
 import { CountUp } from "./CountUp";
 
@@ -27,8 +27,11 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="mt-7 text-[2.75rem] font-semibold leading-[1.04] text-forest-950 sm:text-6xl lg:text-[4.25rem]">
-            Give your old electronics a{" "}
+          <p className="mt-7 text-sm font-bold uppercase tracking-[0.16em] text-forest-600">
+            {siteConfig.tagline}
+          </p>
+          <h1 className="mt-3 text-[2.75rem] font-semibold leading-[1.04] text-forest-950 sm:text-6xl lg:text-[4.25rem]">
+            Give technology a{" "}
             <span className="relative inline-block">
               <span className="gradient-text">second life.</span>
               <svg
@@ -49,9 +52,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-8 max-w-xl text-base leading-relaxed text-forest-900/70 sm:text-lg">
-            We collect and recycle old electronics for free, repair and donate
-            working devices to schools, upgrade organisations, and buy your
-            old tech. Free pickups across Juja &amp; Nairobi.
+            {siteConfig.statement} We collect, recycle, refurbish and reuse
+            electronics across Juja &amp; Nairobi, and open access to technology
+            for underserved communities.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -80,7 +83,7 @@ export function Hero() {
               <Recycle className="h-4 w-4 text-forest-500" /> Free collection
             </span>
             <a
-              href={whatsappUrl("Hello Relay! Please tell me about your pickup service.")}
+              href={whatsappUrl("Hello Novacycle! Please tell me about your pickup service.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-semibold text-forest-700 hover:text-forest-900"

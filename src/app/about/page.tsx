@@ -14,16 +14,16 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Relay is an environmental and social enterprise in Juja and Nairobi, Kenya, turning electronic waste into opportunity through repair, reuse, donation and partnership.",
+    "Novacycle Technologies Ltd turns electronic waste into opportunity through collection, recycling, refurbishment and reuse, and expands access to technology for underserved communities.",
 };
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Relay"
-        title="Technology with a purpose. Waste with a future."
-        description="We are environmental champions based in Juja and Nairobi, working to make responsible technology access a reality for every Kenyan community."
+        eyebrow="About Novacycle"
+        title="Turning E-Waste into Opportunity."
+        description="Giving technology a second life and communities a new opportunity. We work across Juja and Nairobi on e-waste management, digital inclusion and environmental sustainability."
         breadcrumb={[{ label: "About" }]}
         image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80"
         imageAlt="A team working together on laptops"
@@ -58,7 +58,7 @@ export default function AboutPage() {
                 very devices those piles contain.
               </p>
               <p>
-                Relay was born to close that gap. We collect e-waste
+                Novacycle was born to close that gap. We collect e-waste
                 responsibly, repair what can be repaired, donate working devices
                 to those who need them, and help organisations upgrade without
                 wasting. Every step is guided by one question: who does this
@@ -80,18 +80,14 @@ export default function AboutPage() {
             <Compass className="h-8 w-8 text-lime-400" />
             <h2 className="mt-6 text-2xl font-semibold">Our mission</h2>
             <p className="mt-4 text-sm leading-relaxed text-forest-100/70 sm:text-base">
-              To divert electronic waste from landfill and turn it into
-              opportunity — through responsible collection, repair, donation
-              and partnerships that uplift communities.
+              To promote responsible electronic waste management through collection, recycling, refurbishment and reuse of electronic devices, while expanding access to technology and empowering underserved communities through digital inclusion.
             </p>
           </div>
           <div className="rounded-4xl border border-white/10 bg-white/5 p-8 backdrop-blur sm:p-10">
             <Eye className="h-8 w-8 text-lime-400" />
             <h2 className="mt-6 text-2xl font-semibold">Our vision</h2>
             <p className="mt-4 text-sm leading-relaxed text-forest-100/70 sm:text-base">
-              A Kenya where no usable technology goes to waste, no child is left
-              behind digitally, and environmental action is something every
-              person can take part in.
+              To create a sustainable, digitally inclusive Africa where electronic waste is transformed into valuable resources, environmental pollution is minimized, and every community has access to the technology needed to thrive.
             </p>
           </div>
         </Container>
@@ -101,10 +97,10 @@ export default function AboutPage() {
         <Container>
           <SectionHeading
             eyebrow="What drives us"
-            title="Four values we never compromise."
+            title="Our core values."
             align="center"
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 0.06}>
                 <div className="h-full rounded-3xl border border-forest-100 bg-white p-7 shadow-card">
@@ -151,7 +147,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <CTASection whatsappMessage="Hello Relay! I was reading about the team and would like to get in touch." />
+      <CTASection whatsappMessage="Hello Novacycle! I was reading about the team and would like to get in touch." />
     </>
   );
 }

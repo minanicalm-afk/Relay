@@ -1,22 +1,22 @@
 /**
  * Central site configuration.
- * TODO: Replace the placeholder phone number, WhatsApp number and email
- * with Relay's real contact details before launch.
  */
 
 export const siteConfig = {
-  name: "Relay",
-  legalName: "Relay Environmental Solutions",
-  tagline: "Technology with a purpose. Waste with a future.",
+  name: "Novacycle",
+  legalName: "Novacycle Technologies Ltd",
+  tagline: "Turning E-Waste into Opportunity.",
+  statement: "Giving technology a second life and communities a new opportunity.",
+  pillars: ["E-Waste Management", "Digital Inclusion", "Environmental Sustainability"],
   description:
-    "Relay collects, repairs and recycles electronic waste across Juja and Nairobi, donates refurbished devices to schools and needy communities, upgrades organisations' IT equipment, buys your old electronics for instant offers, and partners for community impact.",
+    "Novacycle Technologies Ltd promotes responsible electronic waste management through collection, recycling, refurbishment and reuse, while expanding access to technology for underserved communities.",
   url: "https://techgive.co.ke",
-  email: "hello@techgive.co.ke",
-  phoneDisplay: "+254 700 000 000",
-  phoneDial: "+254700000000",
-  whatsapp: "254700000000",
+  email: "novacycletechnologies@gmail.com",
+  phoneDisplay: "0729 843111",
+  phoneDial: "+254729843111",
+  whatsapp: "254729843111",
   whatsappDefaultMessage:
-    "Hello Relay! I'd like to learn more about your services.",
+    "Hello Novacycle! I'd like to learn more about your services.",
   hours: "Monday – Saturday, 8:00 AM – 6:00 PM",
   locations: [
     {

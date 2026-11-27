@@ -9,7 +9,7 @@ export function CTASection({
   description = "Book a free pickup, donate a device, or simply chat with us. Every action moves us toward a cleaner, more inclusive Kenya.",
   primaryLabel = "Book a free pickup",
   primaryHref = "/contact",
-  whatsappMessage = "Hello Relay! I'd like to arrange a pickup.",
+  whatsappMessage = "Hello Novacycle! I'd like to arrange a pickup.",
 }: {
   title?: string;
   description?: string;

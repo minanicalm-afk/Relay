@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/Button";
 export const metadata: Metadata = {
   title: "Our Services",
   description:
-    "E-waste collection, repair and refurbishment, electronics donations, IT upgrades for organisations, buyback and community partnerships — all from Relay.",
+    "E-waste collection, repair and refurbishment, electronics donations, IT upgrades for organisations, buyback and community partnerships — all from Novacycle.",
 };
 
 const reasons = [
@@ -64,7 +64,7 @@ export default function ServicesPage() {
         <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
-              eyebrow="Why Relay"
+              eyebrow="Why Novacycle"
               title="More than a service provider. A partner in purpose."
               description="We are environmental champions who believe technology should uplift people and protect the planet. That belief shapes everything we do."
             />
@@ -98,7 +98,7 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <CTASection whatsappMessage="Hello Relay! I'd like help choosing the right service for my electronics." />
+      <CTASection whatsappMessage="Hello Novacycle! I'd like help choosing the right service for my electronics." />
     </>
   );
 }

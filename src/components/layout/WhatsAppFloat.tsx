@@ -19,7 +19,7 @@ export function WhatsAppFloat() {
           href={whatsappUrl(whatsappMessageForPath(pathname))}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Chat with Relay on WhatsApp: ${siteConfig.phoneDisplay}`}
+          aria-label={`Chat with Novacycle on WhatsApp: ${siteConfig.phoneDisplay}`}
           className="relative grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition hover:scale-105 hover:bg-[#20bd5a]"
         >
           <WhatsAppIcon className="h-7 w-7" />

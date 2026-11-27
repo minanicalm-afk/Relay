@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Relay handles the information you share when booking a pickup, donating, selling electronics or partnering with us.",
+    "How Novacycle handles the information you share when booking a pickup, donating, selling electronics or partnering with us.",
 };
 
 const sections = [
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Legal"
         title="Privacy Policy"
-        description="A plain-language explanation of what we do — and do not do — with the information you share with Relay."
+        description="A plain-language explanation of what we do — and do not do — with the information you share with Novacycle."
         breadcrumb={[{ label: "Privacy Policy" }]}
         image="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=2000&q=80"
         imageAlt="A padlock resting on a laptop keyboard"

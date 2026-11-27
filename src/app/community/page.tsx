@@ -13,7 +13,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export const metadata: Metadata = {
   title: "Community Impact",
   description:
-    "Tree planting, recycling drives, charity marathons and support for orphanages and needy families — the community impact work of Relay and its partners.",
+    "Tree planting, recycling drives, charity marathons and support for orphanages and needy families — the community impact work of Novacycle and its partners.",
 };
 
 export default function CommunityPage() {
@@ -125,7 +125,7 @@ export default function CommunityPage() {
         description="We are always looking for organisations that share our belief in a cleaner, fairer future. Tell us what you care about."
         primaryLabel="Become a partner"
         primaryHref="/partnerships"
-        whatsappMessage="Hello Relay! I'd like to talk about joining a community programme."
+        whatsappMessage="Hello Novacycle! I'd like to talk about joining a community programme."
       />
     </>
   );

@@ -41,34 +41,6 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "repair-refurbish",
-    title: "Repair & Refurbishment",
-    shortTitle: "Repair & Refurbish",
-    tagline: "Fix it first. Replace only when we must.",
-    description:
-      "Many devices are thrown away when a small repair would give them years of life. Our technicians diagnose, repair and thoroughly refurbish computers, laptops, phones and monitors — extending their useful life and keeping them in circulation.",
-    icon: "Wrench",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
-    highlights: [
-      "Skilled local technicians",
-      "Genuine parts wherever available",
-      "Data-safe repairs and diagnostics",
-      "Warranty on refurbished devices",
-    ],
-    process: [
-      { title: "Drop off or collect", description: "Bring your device in or let us pick it up from your location." },
-      { title: "Diagnosis", description: "We run a full assessment and share a clear repair quote before any work." },
-      { title: "Repair & test", description: "Components are repaired or replaced, then stress-tested for reliability." },
-      { title: "Return or donate", description: "Get your device back, or donate it to a learner who needs it." },
-    ],
-    benefits: [
-      { title: "Save money", description: "Repairing is almost always cheaper than replacing." },
-      { title: "Keep data secure", description: "We handle your information carefully and wipe devices when requested." },
-      { title: "Circular by design", description: "Every repaired device is one less product manufactured." },
-    ],
-  },
-  {
     slug: "donations",
     title: "Electronics Donations",
     shortTitle: "Donations",
@@ -94,6 +66,34 @@ export const services: Service[] = [
       { title: "Bridge the digital divide", description: "Give learners access to the tools they need to thrive." },
       { title: "Social proof that matters", description: "Real stories from real communities, not just numbers." },
       { title: "Guilt-free clearing out", description: "Your unused tech becomes a powerful act of generosity." },
+    ],
+  },
+  {
+    slug: "community-partnerships",
+    title: "Community Partnerships",
+    shortTitle: "Partnerships",
+    tagline: "Big change happens when organisations work together.",
+    description:
+      "We partner with like-minded organisations on high-impact community activities: tree planting, recycling drives, charity marathons, donations to orphanages and support for vulnerable groups. If your organisation cares about people and the planet, we should talk.",
+    icon: "UsersRound",
+    image:
+      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80",
+    highlights: [
+      "Tree planting & environmental restoration",
+      "Community recycling campaigns",
+      "Charity runs and marathons",
+      "Orphanage and needy-family support",
+    ],
+    process: [
+      { title: "Start a conversation", description: "Tell us about your organisation and the impact you want to make." },
+      { title: "Co-design", description: "We shape an activity that fits your goals, audience and resources." },
+      { title: "Activate", description: "We mobilise our network and deliver the activity together." },
+      { title: "Measure & share", description: "We report outcomes and celebrate the story publicly." },
+    ],
+    benefits: [
+      { title: "Amplified impact", description: "Combine strengths to reach more people and places." },
+      { title: "Brand purpose", description: "Show your stakeholders you care through action, not words." },
+      { title: "Local roots", description: "Programmes grounded in the realities of Juja and Nairobi." },
     ],
   },
   {
@@ -125,6 +125,34 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "repair-refurbish",
+    title: "Repair & Refurbishment",
+    shortTitle: "Repair & Refurbish",
+    tagline: "Fix it first. Replace only when we must.",
+    description:
+      "Many devices are thrown away when a small repair would give them years of life. Our technicians diagnose, repair and thoroughly refurbish computers, laptops, phones and monitors — extending their useful life and keeping them in circulation.",
+    icon: "Wrench",
+    image:
+      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
+    highlights: [
+      "Skilled local technicians",
+      "Genuine parts wherever available",
+      "Data-safe repairs and diagnostics",
+      "Warranty on refurbished devices",
+    ],
+    process: [
+      { title: "Drop off or collect", description: "Bring your device in or let us pick it up from your location." },
+      { title: "Diagnosis", description: "We run a full assessment and share a clear repair quote before any work." },
+      { title: "Repair & test", description: "Components are repaired or replaced, then stress-tested for reliability." },
+      { title: "Return or donate", description: "Get your device back, or donate it to a learner who needs it." },
+    ],
+    benefits: [
+      { title: "Save money", description: "Repairing is almost always cheaper than replacing." },
+      { title: "Keep data secure", description: "We handle your information carefully and wipe devices when requested." },
+      { title: "Circular by design", description: "Every repaired device is one less product manufactured." },
+    ],
+  },
+  {
     slug: "buyback",
     title: "Electronics Buyback",
     shortTitle: "Buyback",
@@ -150,34 +178,6 @@ export const services: Service[] = [
       { title: "Quick and transparent", description: "No waiting days for a vague quote." },
       { title: "Safe and legitimate", description: "Ownership checks protect buyers and honest sellers." },
       { title: "Fair value", description: "Offers reflect real condition, age and demand." },
-    ],
-  },
-  {
-    slug: "community-partnerships",
-    title: "Community Partnerships",
-    shortTitle: "Partnerships",
-    tagline: "Big change happens when organisations work together.",
-    description:
-      "We partner with like-minded organisations on high-impact community activities: tree planting, recycling drives, charity marathons, donations to orphanages and support for vulnerable groups. If your organisation cares about people and the planet, we should talk.",
-    icon: "UsersRound",
-    image:
-      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80",
-    highlights: [
-      "Tree planting & environmental restoration",
-      "Community recycling campaigns",
-      "Charity runs and marathons",
-      "Orphanage and needy-family support",
-    ],
-    process: [
-      { title: "Start a conversation", description: "Tell us about your organisation and the impact you want to make." },
-      { title: "Co-design", description: "We shape an activity that fits your goals, audience and resources." },
-      { title: "Activate", description: "We mobilise our network and deliver the activity together." },
-      { title: "Measure & share", description: "We report outcomes and celebrate the story publicly." },
-    ],
-    benefits: [
-      { title: "Amplified impact", description: "Combine strengths to reach more people and places." },
-      { title: "Brand purpose", description: "Show your stakeholders you care through action, not words." },
-      { title: "Local roots", description: "Programmes grounded in the realities of Juja and Nairobi." },
     ],
   },
 ];
@@ -236,7 +236,7 @@ export const whyUs = [
   {
     title: "To our team",
     description:
-      "Work that builds real skill and purpose. Every collection, repair and placement connects the people at Relay to a tangible change in nearby schools and homes.",
+      "Work that builds real skill and purpose. Every collection, repair and placement connects the people at Novacycle to a tangible change in nearby schools and homes.",
     linkLabel: "Meet the team",
     href: "/about",
     icon: "Wrench",
@@ -289,19 +289,19 @@ export const communityActivities = [
 export const testimonials = [
   {
     quote:
-      "We replaced twenty old desktops with refurbished ones through Relay. The upgrade was smooth, and they handled every old machine responsibly. Our board loved the sustainability story.",
+      "We replaced twenty old desktops with refurbished ones through Novacycle. The upgrade was smooth, and they handled every old machine responsibly. Our board loved the sustainability story.",
     name: "Wanjiku M.",
     role: "Operations Manager, Nairobi",
   },
   {
     quote:
-      "I had three dead laptops sitting in a store for years. Relay collected them for free and even gave me a record for my records. That kind of professionalism is rare.",
+      "I had three dead laptops sitting in a store for years. Novacycle collected them for free and even gave me a record for my records. That kind of professionalism is rare.",
     name: "Peter K.",
     role: "Resident, Juja",
   },
   {
     quote:
-      "The students were thrilled to receive working laptops. Our digital literacy programme finally had the tools it needed, thanks to Relay and their partners.",
+      "The students were thrilled to receive working laptops. Our digital literacy programme finally had the tools it needed, thanks to Novacycle and their partners.",
     name: "Sr. Mary W.",
     role: "School Administrator, Kiambu",
   },
@@ -350,27 +350,28 @@ export const faqs = [
 
 export const values = [
   {
-    title: "Environment first",
-    description:
-      "Every decision starts with the question: how does this affect our planet? We reuse before we recycle, and we never cut corners on disposal.",
+    title: "Sustainability",
+    description: "Protecting the environment for future generations.",
     icon: "Leaf",
   },
   {
-    title: "People over profit",
-    description:
-      "Technology should open doors. We measure our success in learners empowered and families supported, not just revenue.",
-    icon: "HeartHandshake",
+    title: "Innovation",
+    description: "Creating practical solutions to electronic waste challenges.",
+    icon: "Lightbulb",
   },
   {
-    title: "Transparency always",
-    description:
-      "Clear pricing, honest advice and documented outcomes. You will always know what happened to your devices.",
-    icon: "Eye",
+    title: "Digital Inclusion",
+    description: "Bridging the digital divide through equitable access to technology.",
+    icon: "MonitorSmartphone",
   },
   {
-    title: "Local roots, real impact",
-    description:
-      "We are based here, we work here, and we are accountable to the communities of Juja and Nairobi.",
-    icon: "MapPin",
+    title: "Responsibility",
+    description: "Promoting safe and ethical e-waste management.",
+    icon: "ShieldCheck",
+  },
+  {
+    title: "Empowerment",
+    description: "Creating opportunities through technology reuse and skills development.",
+    icon: "HandHeart",
   },
 ];

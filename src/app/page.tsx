@@ -35,7 +35,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <CTASection whatsappMessage="Hello Relay! I'm on the homepage and I'm ready to book a free pickup." />
+      <CTASection whatsappMessage="Hello Novacycle! I'm on the homepage and I'm ready to book a free pickup." />
     </>
   );
 }

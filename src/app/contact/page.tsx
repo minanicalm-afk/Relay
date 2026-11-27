@@ -9,7 +9,7 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Relay in Juja or Nairobi for free e-waste pickups, donations, IT upgrades, buyback and partnerships. Chat with us on WhatsApp.",
+    "Contact Novacycle in Juja or Nairobi for free e-waste pickups, donations, IT upgrades, buyback and partnerships. Chat with us on WhatsApp.",
 };
 
 export default function ContactPage() {
@@ -48,25 +48,25 @@ export default function ContactPage() {
               ))}
             </div>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3">
               <a href={`tel:${siteConfig.phoneDial}`} className="flex items-center gap-3 rounded-2xl border border-forest-100 bg-white p-4 shadow-card transition hover:border-forest-300">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-forest-50 text-forest-700"><Phone className="h-4 w-4" /></span>
-                <span>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-forest-50 text-forest-700"><Phone className="h-4 w-4" /></span>
+                <span className="min-w-0">
                   <span className="block text-[11px] text-forest-900/80">Call us</span>
                   <span className="block text-sm font-semibold text-forest-900">{siteConfig.phoneDisplay}</span>
                 </span>
               </a>
               <a href={mailtoUrl()} className="flex items-center gap-3 rounded-2xl border border-forest-100 bg-white p-4 shadow-card transition hover:border-forest-300">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-forest-50 text-forest-700"><Mail className="h-4 w-4" /></span>
-                <span>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-forest-50 text-forest-700"><Mail className="h-4 w-4" /></span>
+                <span className="min-w-0">
                   <span className="block text-[11px] text-forest-900/80">Email us</span>
-                  <span className="block truncate text-sm font-semibold text-forest-900">{siteConfig.email}</span>
+                  <span className="block break-all text-sm font-semibold text-forest-900">{siteConfig.email}</span>
                 </span>
               </a>
             </div>
 
             <a
-              href={whatsappUrl("Hello Relay! I'm on the contact page and would like to talk about a pickup, donation, sale, or partnership.")}
+              href={whatsappUrl("Hello Novacycle! I'm on the contact page and would like to talk about a pickup, donation, sale, or partnership.")}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 flex items-center gap-4 rounded-3xl bg-[#25D366] p-5 text-white shadow-lift transition hover:brightness-105"
@@ -115,7 +115,7 @@ export default function ContactPage() {
               </a>
             </div>
             <iframe
-              title="Map of the Relay Juja shop at Josachi Computers, Alma Matta Building, Gachororo Road"
+              title="Map of the Novacycle Juja shop at Josachi Computers, Alma Matta Building, Gachororo Road"
               src="https://maps.google.com/maps?q=-1.0949261,37.0190503&z=17&output=embed"
               className="h-[24rem] w-full border-0 sm:h-[28rem]"
               loading="lazy"

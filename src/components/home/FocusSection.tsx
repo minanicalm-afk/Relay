@@ -31,7 +31,7 @@ export function FocusSection() {
                 ♻ Diverted from landfill, returned to purpose.
               </p>
               <p className="mt-1 text-sm text-forest-100/70">
-                That is the Relay promise.
+                That is the Novacycle promise.
               </p>
             </div>
           </div>

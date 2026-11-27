@@ -11,7 +11,7 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Answers to common questions about e-waste collection, donations, IT upgrades, selling your electronics and partnering with Relay.",
+    "Answers to common questions about e-waste collection, donations, IT upgrades, selling your electronics and partnering with Novacycle.",
 };
 
 export default function FAQPage() {
@@ -35,7 +35,7 @@ export default function FAQPage() {
               a question to expand the answer.
             </p>
             <a
-              href={whatsappUrl("Hello Relay! I have a question not covered by your FAQ.")}
+              href={whatsappUrl("Hello Novacycle! I have a question not covered by your FAQ.")}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-7 inline-flex items-center gap-3 rounded-2xl border border-forest-100 bg-white p-4 shadow-card transition hover:border-forest-300"

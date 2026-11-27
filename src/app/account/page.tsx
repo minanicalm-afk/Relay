@@ -49,7 +49,7 @@ export default async function AccountPage() {
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-500">Account</p>
           <h1 className="mt-3 text-4xl font-semibold text-forest-950">Your profile</h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-forest-900/75">
-            {roleLabels[user?.role ?? session.role]}. Updates made by the Relay team on your requests show up here.
+            {roleLabels[user?.role ?? session.role]}. Updates made by the Novacycle team on your requests show up here.
           </p>
           <div className="mt-8">
             <ProfileForm
@@ -84,7 +84,7 @@ export default async function AccountPage() {
                 <p className="mt-3 text-xs text-forest-900/60">{formatDate(submission.createdAt)}</p>
                 {submission.notes && (
                   <p className="mt-3 rounded-2xl bg-lime-50 px-3 py-2 text-sm text-forest-900">
-                    Update from Relay: {submission.notes}
+                    Update from Novacycle: {submission.notes}
                   </p>
                 )}
                 {submission.devices.length > 0 && (

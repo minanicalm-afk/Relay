@@ -44,8 +44,8 @@ export function Header() {
       <div className="bg-forest-950 text-forest-100">
         <div className="container-wide flex h-9 items-center justify-between gap-4 text-[11px] font-medium sm:text-xs">
           <p className="truncate">
-            <span className="text-lime-400">✦</span> Environmental champions
-            turning e-waste into community impact
+            <span className="text-lime-400">✦</span>{" "}
+            {siteConfig.pillars.join("  •  ")}
           </p>
           <div className="hidden items-center gap-5 md:flex">
             <span className="inline-flex items-center gap-1.5">

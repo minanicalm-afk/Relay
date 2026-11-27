@@ -59,7 +59,7 @@ export function ContactForm() {
     });
 
     openWhatsApp(
-      `Hello Relay! I would like to get in touch.\n\n` +
+      `Hello Novacycle! I would like to get in touch.\n\n` +
         `Name: ${name.trim()}\n` +
         `Phone: ${phone.trim()}\n` +
         `Email: ${email.trim() || "Not provided"}\n` +

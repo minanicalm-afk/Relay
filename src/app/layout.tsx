@@ -19,7 +19,7 @@ const display = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — E-Waste Collection, Recycling & Digital Inclusion`,
+    default: `${siteConfig.legalName} — ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: "en_KE",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Technology with a purpose. Waste with a future.`,
+    title: `${siteConfig.legalName} — ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   twitter: {
